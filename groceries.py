@@ -25,64 +25,69 @@ products = [
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
-# Products Part 1
 
-products_count=len(products)
-
-print("--------------")
-print("There are " + str(products_count) + " products:")
-print("--------------")
+if __name__ == "__main__":
 
 
-def sort_by_name(any_product):
-    return(any_product["name"])
-sorted_products = sorted(products, key=sort_by_name)
+
+    # Products Part 1
+
+    products_count=len(products)
+
+    print("--------------")
+    print(f"There are {products_count} products:")
+    print("--------------")
 
 
-#{
-# "id":1, 
-# "name": "Chocolate Sandwich Cookies", 
-# "department": "snacks", 
-# "aisle": "cookies cakes", 
-# "price": 3.50
-# },
-
-for p in sorted_products:
-    price_usd = p["price"]
-    price_usd = " (${0:.2f})".format(p["price"])
-    print("+ " + p["name"] + price_usd)
+    def sort_by_name(any_product):
+        return(any_product["name"])
+    sorted_products = sorted(products, key=sort_by_name)
 
 
-#
-# DEPARTMENTS (Part 2)
-#
+    #{
+    # "id":1, 
+    # "name": "Chocolate Sandwich Cookies", 
+    # "department": "snacks", 
+    # "aisle": "cookies cakes", 
+    # "price": 3.50
+    # },
 
-departments = []
-for p in products:
-    #print(p["department"])
-    departments.append(p["department"])
-    #if p["department"] not in departments:
-    #    departments.append(p["department"])
+    for p in sorted_products:
+        price_usd = p["price"]
+        price_usd = "(${0:.2f})".format(p["price"])
+        print(f"+ {p['name']} {price_usd}")
 
 
-unique_departments = list(set(departments))
+    #
+    # DEPARTMENTS (Part 2)
+    #
+
+    departments = []
+    for p in products:
+        #print(p["department"])
+        departments.append(p["department"])
+        #if p["department"] not in departments:
+        #    departments.append(p["department"])
 
 
-department_count = len(unique_departments)
-print("--------------")
-print("There are " + str(department_count) + " Departments:")
-print("--------------")
+    unique_departments = list(set(departments))
 
-unique_departments.sort()
 
-for d in unique_departments:
-    matching_products = [p for p in products if p["department"] == d]
-    matching_products_count = len(matching_products)
-    if matching_products_count > 1:
-        label = "Products"
-    else:
-        label = "Product"
-    print(" + " + d.title() + " (" + str(matching_products_count) + " " + label + ")" )
+    department_count = len(unique_departments)
+    print("--------------")
+    print(f"There are {department_count} Departments:")
+    print("--------------")
+
+    unique_departments.sort()
+
+    for d in unique_departments:
+        matching_products = [p for p in products if p["department"] == d]
+        matching_products_count = len(matching_products)
+        if matching_products_count > 1:
+            label = "Products"
+        else:
+            label = "Product"
+        print(" + " + d.title() + " (" + str(matching_products_count) + " " + label + ")" )
 
 
 
